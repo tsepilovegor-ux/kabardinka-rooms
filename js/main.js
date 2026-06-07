@@ -174,7 +174,8 @@ function renderSharedCard(space) {
 function initSharedCarousel() {
   const track = document.getElementById("shared-track");
   const dotsContainer = document.getElementById("shared-dots");
-  const spaces = SITE_CONFIG.sharedSpaces || [];
+  const about = SITE_CONFIG.about || {};
+  const spaces = about.places || [];
   if (!track || !dotsContainer || !spaces.length) return;
 
   track.innerHTML = spaces.map(renderSharedCard).join("");
@@ -198,7 +199,7 @@ function initSharedCarousel() {
 
   function startAutoplay() {
     clearInterval(timer);
-    timer = setInterval(() => goTo(current + 1), SITE_CONFIG.sharedSlideInterval || 4500);
+    timer = setInterval(() => goTo(current + 1), about.slideInterval || 4500);
   }
 
   dotsContainer.querySelectorAll(".shared-carousel__dot").forEach((dot) => {
@@ -209,6 +210,21 @@ function initSharedCarousel() {
   });
 
   startAutoplay();
+}
+
+function renderAboutSection() {
+  const about = SITE_CONFIG.about;
+  if (!about) return;
+
+  const title = document.getElementById("about-title");
+  const subtitle = document.getElementById("about-subtitle");
+  const text = document.getElementById("about-text");
+
+  if (title && about.title) title.textContent = about.title;
+  if (subtitle && about.subtitle) subtitle.textContent = about.subtitle;
+  if (text && about.paragraphs?.length) {
+    text.innerHTML = about.paragraphs.map((p) => `<p>${p}</p>`).join("");
+  }
 }
 
 function initHeroSlideshow() {
@@ -311,6 +327,7 @@ function initScrollReveal() {
 
 document.addEventListener("DOMContentLoaded", () => {
   fillStaticContent();
+  renderAboutSection();
   initHeroSlideshow();
   initSharedCarousel();
   renderRooms();
