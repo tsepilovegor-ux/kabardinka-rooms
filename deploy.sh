@@ -4,6 +4,14 @@ set -e
 
 cd "$(dirname "$0")/.."
 
+echo "→ Проверка git..."
+if [ ! -d .git ]; then
+  echo "→ Инициализирую git-репозиторий..."
+  git init -b main
+  git add -A
+  git commit -m "Initial site" || true
+fi
+
 echo "→ Проверка входа в GitHub..."
 if ! gh auth status >/dev/null 2>&1; then
   echo ""

@@ -8,7 +8,7 @@ const SITE_CONFIG = {
   whatsappPhone: "79048003360",
 
   // URL сайта после публикации (нужен для QR-кода)
-  siteUrl: "https://ваш-логин.github.io/kabardinka-rooms",
+  siteUrl: "https://tsepilovegor-ux.github.io/kabardinka-rooms",
 
   address: {
     city: "Геленджик",
