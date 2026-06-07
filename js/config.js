@@ -59,16 +59,9 @@ const SITE_CONFIG = {
     {
       id: 3,
       name: "Номер 3",
-      description: "Описание добавите позже.",
-      capacity: "2 гостя",
-      image: "images/rooms/room-3.jpg",
-    },
-    {
-      id: 4,
-      name: "Номер 4",
       description:
-        "Двухкомнатный номер для большой семьи. Первая комната — с двумя раздельными кроватями, яркий интерьер с медведем на стене, кондиционер и ТВ. Вторая — с большой двуспальной кроватью, терракотовым изголовьем, шкафом, рабочей зоной и креслом. Общая ванная с душем.",
-      capacity: "до 6 гостей",
+        "Светлый номер с двуспальной и односпальной кроватью — удобен для семьи из трёх человек. Стильный интерьер в серо-синих тонах, шкаф, кресло, кондиционер. Современная ванная с мраморной плиткой и душем.",
+      capacity: "до 3 гостей",
       image: "images/rooms/room-3/01.png",
       images: [
         "images/rooms/room-3/01.png",
@@ -77,7 +70,23 @@ const SITE_CONFIG = {
         "images/rooms/room-3/04.png",
         "images/rooms/room-3/05.png",
         "images/rooms/room-3/06.png",
-        "images/rooms/room-3/07.png",
+      ],
+    },
+    {
+      id: 4,
+      name: "Номер 4",
+      description:
+        "Двухкомнатный номер для большой семьи. Первая комната — с двумя раздельными кроватями, яркий интерьер с медведем на стене, кондиционер и ТВ. Вторая — с большой двуспальной кроватью, терракотовым изголовьем, шкафом, рабочей зоной и креслом. Общая ванная с душем.",
+      capacity: "до 6 гостей",
+      image: "images/rooms/room-4-family/01.png",
+      images: [
+        "images/rooms/room-4-family/01.png",
+        "images/rooms/room-4-family/02.png",
+        "images/rooms/room-4-family/03.png",
+        "images/rooms/room-4-family/04.png",
+        "images/rooms/room-4-family/05.png",
+        "images/rooms/room-4-family/06.png",
+        "images/rooms/room-4-family/07.png",
       ],
     },
     {
