@@ -227,6 +227,33 @@ function renderAboutSection() {
   }
 }
 
+function isInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+}
+
+function initScrollReveal() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: "0px 0px -20px 0px" }
+  );
+
+  document.querySelectorAll(".reveal").forEach((el) => {
+    if (isInViewport(el)) {
+      el.classList.add("visible");
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+
 function initHeroSlideshow() {
   const container = document.getElementById("hero-slideshow");
   const slides = SITE_CONFIG.heroSlides || [];
@@ -307,22 +334,6 @@ function fillStaticContent() {
     qrImg.alt = "QR-код для доступа к сайту";
   }
   if (qrUrl) qrUrl.textContent = SITE_CONFIG.siteUrl;
-}
-
-function initScrollReveal() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-  );
-
-  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
