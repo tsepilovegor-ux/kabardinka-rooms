@@ -155,6 +155,31 @@ function shiftLightbox(delta) {
   updateLightbox();
 }
 
+function initHeroSlideshow() {
+  const container = document.getElementById("hero-slideshow");
+  const slides = SITE_CONFIG.heroSlides || [];
+  if (!container || slides.length === 0) return;
+
+  container.innerHTML = slides
+    .map(
+      (src, i) =>
+        `<div class="hero__slide${i === 0 ? " active" : ""}" style="background-image:url('${src}')"></div>`
+    )
+    .join("");
+
+  if (slides.length === 1) return;
+
+  const elements = container.querySelectorAll(".hero__slide");
+  let current = 0;
+  const interval = SITE_CONFIG.heroSlideInterval || 5000;
+
+  setInterval(() => {
+    elements[current].classList.remove("active");
+    current = (current + 1) % elements.length;
+    elements[current].classList.add("active");
+  }, interval);
+}
+
 function initLightbox() {
   const lb = document.getElementById("lightbox");
   if (!lb) return;
@@ -230,6 +255,7 @@ function initScrollReveal() {
 
 document.addEventListener("DOMContentLoaded", () => {
   fillStaticContent();
+  initHeroSlideshow();
   renderRooms();
   renderAttractions();
   initScrollReveal();

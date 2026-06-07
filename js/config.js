@@ -10,6 +10,13 @@ const SITE_CONFIG = {
   // URL сайта после публикации (нужен для QR-кода)
   siteUrl: "https://tsepilovegor-ux.github.io/kabardinka-rooms",
 
+  // Фото на главном экране (меняются автоматически)
+  heroSlideInterval: 5000,
+  heroSlides: [
+    "images/hero/01.png",
+    "images/hero/02.png",
+  ],
+
   address: {
     city: "Геленджик",
     village: "село Кабардинка",
