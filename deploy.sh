@@ -2,7 +2,7 @@
 # Публикация сайта на GitHub Pages (бесплатно)
 set -e
 
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")"
 
 echo "→ Проверка git..."
 if [ ! -d .git ]; then
