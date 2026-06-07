@@ -155,6 +155,62 @@ function shiftLightbox(delta) {
   updateLightbox();
 }
 
+function renderSharedCard(space) {
+  const hasImage = Boolean(space.image);
+  const imageBlock = hasImage
+    ? `<div class="shared-card__image"><img src="${space.image}" alt="${space.name}" loading="lazy"><span class="shared-card__icon">${space.icon}</span></div>`
+    : `<div class="shared-card__image shared-card__image--placeholder"><span class="shared-card__icon">${space.icon}</span></div>`;
+
+  return `
+    <article class="shared-card">
+      ${imageBlock}
+      <div class="shared-card__body">
+        <h3>${space.name}</h3>
+        <p>${space.description}</p>
+      </div>
+    </article>`;
+}
+
+function initSharedCarousel() {
+  const track = document.getElementById("shared-track");
+  const dotsContainer = document.getElementById("shared-dots");
+  const spaces = SITE_CONFIG.sharedSpaces || [];
+  if (!track || !dotsContainer || !spaces.length) return;
+
+  track.innerHTML = spaces.map(renderSharedCard).join("");
+  dotsContainer.innerHTML = spaces
+    .map(
+      (_, i) =>
+        `<button type="button" class="shared-carousel__dot${i === 0 ? " active" : ""}" data-index="${i}" aria-label="${spaces[i].name}"></button>`
+    )
+    .join("");
+
+  let current = 0;
+  let timer;
+
+  function goTo(index) {
+    current = (index + spaces.length) % spaces.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsContainer.querySelectorAll(".shared-carousel__dot").forEach((dot, i) => {
+      dot.classList.toggle("active", i === current);
+    });
+  }
+
+  function startAutoplay() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), SITE_CONFIG.sharedSlideInterval || 4500);
+  }
+
+  dotsContainer.querySelectorAll(".shared-carousel__dot").forEach((dot) => {
+    dot.addEventListener("click", () => {
+      goTo(Number(dot.dataset.index));
+      startAutoplay();
+    });
+  });
+
+  startAutoplay();
+}
+
 function initHeroSlideshow() {
   const container = document.getElementById("hero-slideshow");
   const slides = SITE_CONFIG.heroSlides || [];
@@ -256,6 +312,7 @@ function initScrollReveal() {
 document.addEventListener("DOMContentLoaded", () => {
   fillStaticContent();
   initHeroSlideshow();
+  initSharedCarousel();
   renderRooms();
   renderAttractions();
   initScrollReveal();

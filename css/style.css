@@ -244,6 +244,113 @@ a { color: inherit; text-decoration: none; }
   max-width: 540px;
 }
 
+/* ===== Shared spaces carousel ===== */
+.shared-carousel {
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.shared-carousel__viewport {
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.shared-carousel__track {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shared-card {
+  flex: 0 0 100%;
+  background: var(--white);
+}
+
+.shared-card__image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, var(--sea-mid), var(--sea-light));
+  overflow: hidden;
+}
+
+.shared-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shared-card__image--placeholder::after {
+  content: "📷 Фото скоро";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.shared-card__icon {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 1.5rem;
+  background: rgba(10, 61, 98, 0.8);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.shared-card__body {
+  padding: 1.4rem 1.5rem 1.6rem;
+}
+
+.shared-card__body h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--sea-deep);
+  margin-bottom: 0.45rem;
+}
+
+.shared-card__body p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.shared-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.2rem;
+}
+
+.shared-carousel__dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(10, 61, 98, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.shared-carousel__dot:hover {
+  background: rgba(10, 61, 98, 0.4);
+}
+
+.shared-carousel__dot.active {
+  background: var(--sea-mid);
+  transform: scale(1.15);
+}
+
 /* ===== Reveal animation ===== */
 .reveal {
   opacity: 0;
