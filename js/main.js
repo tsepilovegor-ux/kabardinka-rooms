@@ -299,6 +299,42 @@ function initLightbox() {
   });
 }
 
+function renderDirections() {
+  const directions = SITE_CONFIG.directions;
+  if (!directions) return;
+
+  const subtitle = document.getElementById("location-subtitle");
+  const list = document.getElementById("directions-list");
+  const transfer = document.getElementById("transfer-note");
+
+  if (subtitle && directions.subtitle) subtitle.textContent = directions.subtitle;
+
+  if (list && directions.routes?.length) {
+    list.innerHTML = directions.routes
+      .map(
+        (route) => `
+      <article class="direction-card">
+        <div class="direction-card__head">
+          <span class="direction-card__icon">${route.icon}</span>
+          <h4 class="direction-card__title">${route.title}</h4>
+        </div>
+        <p class="direction-card__text">${route.text}</p>
+      </article>`
+      )
+      .join("");
+  }
+
+  if (transfer && directions.transfer) {
+    const transferUrl = buildWhatsAppUrl(
+      SITE_CONFIG.whatsappPhone,
+      "Здравствуйте! Интересует трансфер до гостевого дома."
+    );
+    transfer.innerHTML = `
+      <p>${directions.transfer}</p>
+      <a class="btn btn--primary" href="${transferUrl}" target="_blank" rel="noopener">Уточнить трансфер</a>`;
+  }
+}
+
 function renderAttractions() {
   const list = document.getElementById("attractions-list");
   if (!list) return;
@@ -342,6 +378,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroSlideshow();
   initSharedCarousel();
   renderRooms();
+  renderDirections();
   renderAttractions();
   initScrollReveal();
   initLightbox();
