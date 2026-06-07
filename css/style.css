@@ -1,0 +1,606 @@
+/* ===== Variables ===== */
+:root {
+  --sea-deep: #0a3d62;
+  --sea-mid: #1e6f9f;
+  --sea-light: #48cae4;
+  --sand: #f4e4bc;
+  --sand-light: #faf6ee;
+  --white: #ffffff;
+  --glass: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.22);
+  --text: #1a2a3a;
+  --text-muted: #5a6a7a;
+  --whatsapp: #25d366;
+  --radius: 16px;
+  --shadow: 0 8px 32px rgba(10, 61, 98, 0.15);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--sand-light);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  width: min(1100px, 92vw);
+  margin-inline: auto;
+}
+
+/* ===== Header ===== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1rem 0;
+  background: rgba(10, 61, 98, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.logo span { color: var(--sea-light); }
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav a {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.nav a:hover { color: var(--sea-light); }
+
+@media (max-width: 600px) {
+  .nav { gap: 0.8rem; font-size: 0.85rem; }
+}
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+  overflow: hidden;
+  padding: 6rem 1rem 4rem;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(160deg, rgba(10, 61, 98, 0.75) 0%, rgba(30, 111, 159, 0.55) 40%, rgba(72, 202, 228, 0.35) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%2348cae4' fill-opacity='0.15' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") bottom / cover no-repeat,
+    linear-gradient(180deg, var(--sea-deep) 0%, var(--sea-mid) 100%);
+  z-index: -1;
+}
+
+.hero__wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 80px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C300,120 600,0 900,60 C1050,90 1150,30 1200,60 L1200,120 L0,120 Z' fill='%23faf6ee'/%3E%3C/svg%3E") repeat-x;
+  background-size: 600px 80px;
+  animation: wave 12s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes wave {
+  from { transform: translateX(0); }
+  to { transform: translateX(-600px); }
+}
+
+.hero__content { max-width: 680px; }
+
+.hero__tag {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  font-size: 0.85rem;
+  margin-bottom: 1.2rem;
+  backdrop-filter: blur(8px);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.hero__address {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.hero__sea {
+  font-size: 1.15rem;
+  color: var(--sea-light);
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn--primary {
+  background: var(--white);
+  color: var(--sea-deep);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn--whatsapp {
+  background: var(--whatsapp);
+  color: var(--white);
+  width: 100%;
+  justify-content: center;
+}
+
+/* ===== Sections ===== */
+.section {
+  padding: 5rem 0;
+}
+
+.section--alt {
+  background: var(--white);
+}
+
+.section__title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  color: var(--sea-deep);
+}
+
+.section__subtitle {
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  max-width: 540px;
+}
+
+/* ===== Reveal animation ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Room cards ===== */
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.room-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.room-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(10, 61, 98, 0.2);
+}
+
+.room-card__image {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, var(--sea-mid), var(--sea-light));
+  overflow: hidden;
+}
+
+.room-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.25s ease;
+}
+
+.room-card__counter {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(10, 61, 98, 0.75);
+  color: var(--white);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.room-card__thumbs {
+  display: flex;
+  gap: 6px;
+  padding: 8px 10px;
+  overflow-x: auto;
+  background: #f0f4f8;
+  scrollbar-width: thin;
+}
+
+.room-card__thumb {
+  flex: 0 0 56px;
+  height: 42px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  opacity: 0.65;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.room-card__thumb:hover,
+.room-card__thumb.active {
+  opacity: 1;
+  border-color: var(--sea-mid);
+}
+
+.room-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.room-card__zoom {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--sea-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.room-card__zoom:hover {
+  transform: scale(1.08);
+  background: var(--white);
+}
+
+.room-card__main {
+  cursor: zoom-in;
+}
+
+.room-card__image--placeholder .room-card__main {
+  cursor: default;
+}
+
+.room-card__image--placeholder .room-card__zoom {
+  display: none;
+}
+
+/* ===== Lightbox ===== */
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10, 20, 30, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox__content {
+  max-width: min(960px, 96vw);
+  max-height: 90vh;
+  text-align: center;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: calc(90vh - 80px);
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.lightbox__caption {
+  color: var(--white);
+  font-weight: 600;
+  margin-top: 0.8rem;
+  font-size: 1rem;
+}
+
+.lightbox__counter {
+  display: block;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+.lightbox__close,
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  cursor: pointer;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.6rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.lightbox__close:hover,
+.lightbox__prev:hover,
+.lightbox__next:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.lightbox__close {
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+}
+
+.lightbox__prev {
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox__next {
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 600px) {
+  .lightbox__prev { left: 0.5rem; }
+  .lightbox__next { right: 0.5rem; }
+  .lightbox__close { top: 0.5rem; right: 0.5rem; }
+}
+
+.room-card__image--placeholder img { display: none; }
+
+.room-card__image--placeholder::after {
+  content: "📷 Фото скоро";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.room-card__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(10, 61, 98, 0.85);
+  color: var(--white);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.room-card__body { padding: 1.25rem; }
+
+.room-card__capacity {
+  font-size: 0.85rem;
+  color: var(--sea-mid);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.room-card__desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* ===== Location ===== */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 700px) {
+  .location-grid { grid-template-columns: 1fr; }
+}
+
+.location-info {
+  background: linear-gradient(135deg, var(--sea-deep), var(--sea-mid));
+  color: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius);
+}
+
+.location-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.location-info p { opacity: 0.9; margin-bottom: 0.5rem; }
+
+.location-info .btn { margin-top: 1.2rem; }
+
+.location-map {
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #e8eef3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+}
+
+.location-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ===== Attractions ===== */
+.attractions-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.attraction {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.2rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px rgba(10, 61, 98, 0.08);
+  transition: transform 0.2s;
+}
+
+.attraction:hover { transform: translateX(4px); }
+
+.attraction__icon { font-size: 1.5rem; flex-shrink: 0; }
+
+.attraction strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--sea-deep);
+}
+
+.attraction span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ===== QR ===== */
+.qr-block {
+  text-align: center;
+  padding: 2.5rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+.qr-block img {
+  margin: 1rem auto;
+  border-radius: 8px;
+}
+
+.qr-block p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  word-break: break-all;
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: var(--sea-deep);
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+}
+
+.footer a { color: var(--sea-light); }
