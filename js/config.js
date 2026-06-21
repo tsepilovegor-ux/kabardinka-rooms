@@ -7,6 +7,11 @@ const SITE_CONFIG = {
   // Замените на ваш номер WhatsApp (только цифры, с кодом страны)
   whatsappPhone: "79128003350",
 
+  contacts: [
+    { name: "Людмила", phone: "79048033600" },
+    { name: "Юрий", phone: "79128003350", whatsapp: true },
+  ],
+
   // URL сайта после публикации (нужен для QR-кода)
   siteUrl: "https://tsepilovegor-ux.github.io/kabardinka-rooms",
 

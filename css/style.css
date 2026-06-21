@@ -829,3 +829,45 @@ body.lightbox-open {
 }
 
 .footer a { color: var(--sea-light); }
+
+.footer__contacts,
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+
+.footer__contacts {
+  align-items: center;
+}
+
+.contacts {
+  margin-bottom: 1.25rem;
+}
+
+.contact-link {
+  color: var(--sea);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+.contact-link--whatsapp {
+  color: var(--whatsapp);
+}
+
+.footer .contact-link {
+  color: var(--sea-light);
+}
+
+.footer .contact-link--whatsapp {
+  color: #7ddea0;
+}
+
+.location-info h3:not(:first-child) {
+  margin-top: 1.25rem;
+}

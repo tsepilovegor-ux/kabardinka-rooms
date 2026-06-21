@@ -5,6 +5,41 @@ function buildWhatsAppUrl(phone, roomName) {
   return `https://wa.me/${phone}?text=${text}`;
 }
 
+function formatPhoneDisplay(phone) {
+  const digits = phone.replace(/\D/g, "");
+  const local = digits.startsWith("7")
+    ? digits.slice(1)
+    : digits.startsWith("8")
+      ? digits.slice(1)
+      : digits;
+  if (local.length !== 10) return phone;
+  return `8 (${local.slice(0, 3)}) ${local.slice(3, 6)}-${local.slice(6, 8)}-${local.slice(8)}`;
+}
+
+function renderContactLinks() {
+  const contacts = SITE_CONFIG.contacts || [];
+  if (!contacts.length) return "";
+
+  return contacts
+    .map((contact) => {
+      const label = `${formatPhoneDisplay(contact.phone)} — ${contact.name}`;
+      if (contact.whatsapp) {
+        const url = buildWhatsAppUrl(contact.phone, "номер");
+        return `<a class="contact-link contact-link--whatsapp" href="${url}" target="_blank" rel="noopener">${label}</a>`;
+      }
+      return `<a class="contact-link" href="tel:+${contact.phone.replace(/\D/g, "").replace(/^8/, "7")}">${label}</a>`;
+    })
+    .join("");
+}
+
+function renderContacts() {
+  const html = renderContactLinks();
+  const location = document.getElementById("location-contacts");
+  const footer = document.getElementById("footer-contacts");
+  if (location) location.innerHTML = html;
+  if (footer) footer.innerHTML = html;
+}
+
 function getRoomImages(room) {
   if (room.images?.length) return room.images;
   if (room.image) return [room.image];
@@ -374,6 +409,7 @@ function fillStaticContent() {
 
 document.addEventListener("DOMContentLoaded", () => {
   fillStaticContent();
+  renderContacts();
   renderAboutSection();
   initHeroSlideshow();
   initSharedCarousel();
