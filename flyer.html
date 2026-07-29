@@ -45,7 +45,17 @@
     .flyer__hero {
       position: relative;
       height: 88mm;
-      background: var(--sea-deep) url("images/hero/05.jpg") center / cover no-repeat;
+      overflow: hidden;
+      background: var(--sea-deep);
+    }
+
+    .flyer__hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
 
     .flyer__hero::after {
@@ -279,6 +289,7 @@
 
   <article class="flyer">
     <header class="flyer__hero">
+      <img class="flyer__hero-img" src="images/hero/03.png?v=2" width="1200" height="800" alt="">
       <div class="flyer__hero-content">
         <span class="flyer__tag">Гостевой дом · 2026</span>
         <h1 class="flyer__title">Отдых у моря<br>в Кабардинке</h1>
@@ -330,9 +341,9 @@
         <p>Наведите камеру телефона на код</p>
         <img
           class="flyer__qr"
-          src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=8&data=https%3A%2F%2Ftsepilovegor-ux.github.io%2Fkabardinka-rooms"
-          width="400"
-          height="400"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=6&data=https%3A%2F%2Ftsepilovegor-ux.github.io%2Fkabardinka-rooms"
+          width="600"
+          height="600"
           alt="QR-код сайта">
         <p class="flyer__url">tsepilovegor-ux.github.io/kabardinka-rooms</p>
       </aside>
