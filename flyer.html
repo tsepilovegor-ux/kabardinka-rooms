@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Флаер — Кабардинка · у моря</title>
+  <style>
+    :root {
+      --sea-deep: #0a3d62;
+      --sea-mid: #1e6f9f;
+      --sea-light: #48cae4;
+      --sand: #f4e4bc;
+      --sand-light: #faf6ee;
+      --white: #ffffff;
+      --text: #1a2a3a;
+      --whatsapp: #25d366;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    html, body {
+      width: 210mm;
+      height: 297mm;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background: #ddd;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .flyer {
+      width: 210mm;
+      height: 297mm;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: var(--sand-light);
+      position: relative;
+    }
+
+    .flyer__hero {
+      position: relative;
+      height: 88mm;
+      background: var(--sea-deep) url("images/hero/06.jpg") center / cover no-repeat;
+    }
+
+    .flyer__hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(10, 61, 98, 0.55) 0%,
+        rgba(10, 61, 98, 0.82) 100%
+      );
+    }
+
+    .flyer__hero-content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      padding: 10mm 12mm 8mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: var(--white);
+    }
+
+    .flyer__tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 9pt;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      padding: 1.5mm 4mm;
+      margin-bottom: 3mm;
+    }
+
+    .flyer__title {
+      font-size: 28pt;
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      max-width: 140mm;
+    }
+
+    .flyer__subtitle {
+      margin-top: 2mm;
+      font-size: 13pt;
+      font-weight: 500;
+      opacity: 0.95;
+    }
+
+    .flyer__body {
+      flex: 1;
+      padding: 8mm 12mm 10mm;
+      display: grid;
+      grid-template-columns: 1fr 62mm;
+      gap: 8mm;
+    }
+
+    .flyer__benefits h2 {
+      font-size: 13pt;
+      color: var(--sea-deep);
+      margin-bottom: 4mm;
+    }
+
+    .benefit-list {
+      list-style: none;
+      display: grid;
+      gap: 3.5mm;
+    }
+
+    .benefit-list li {
+      display: flex;
+      gap: 3mm;
+      align-items: flex-start;
+      font-size: 10.5pt;
+      line-height: 1.35;
+    }
+
+    .benefit-list .icon {
+      flex-shrink: 0;
+      width: 8mm;
+      height: 8mm;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--sea-mid), var(--sea-light));
+      color: white;
+      font-size: 11pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .benefit-list strong {
+      display: block;
+      color: var(--sea-deep);
+      font-size: 10.5pt;
+    }
+
+    .flyer__cta-text {
+      margin-top: 6mm;
+      padding: 4mm 5mm;
+      background: var(--white);
+      border-left: 3px solid var(--sea-mid);
+      border-radius: 0 6px 6px 0;
+      font-size: 10pt;
+      line-height: 1.4;
+      box-shadow: 0 2px 12px rgba(10, 61, 98, 0.08);
+    }
+
+    .flyer__qr-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: var(--white);
+      border-radius: 8px;
+      padding: 6mm 5mm 5mm;
+      box-shadow: 0 4px 20px rgba(10, 61, 98, 0.12);
+      border: 2px solid var(--sea-light);
+    }
+
+    .flyer__qr-block h2 {
+      font-size: 12pt;
+      color: var(--sea-deep);
+      line-height: 1.25;
+      margin-bottom: 4mm;
+    }
+
+    .flyer__qr-block p {
+      font-size: 9pt;
+      color: #5a6a7a;
+      margin-bottom: 4mm;
+      line-height: 1.35;
+    }
+
+    .flyer__qr {
+      width: 42mm;
+      height: 42mm;
+      border: 3px solid var(--sea-deep);
+      border-radius: 6px;
+      padding: 2mm;
+      background: white;
+    }
+
+    .flyer__url {
+      margin-top: 3mm;
+      font-size: 7.5pt;
+      color: var(--sea-mid);
+      word-break: break-all;
+      line-height: 1.3;
+    }
+
+    .flyer__footer {
+      background: var(--sea-deep);
+      color: white;
+      padding: 6mm 12mm;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6mm;
+      align-items: center;
+    }
+
+    .flyer__address {
+      font-size: 10pt;
+      line-height: 1.45;
+    }
+
+    .flyer__address strong {
+      display: block;
+      font-size: 11pt;
+      margin-bottom: 1mm;
+    }
+
+    .flyer__phones {
+      text-align: right;
+      font-size: 10pt;
+      line-height: 1.55;
+    }
+
+    .flyer__phones strong {
+      display: block;
+      font-size: 9pt;
+      opacity: 0.85;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1mm;
+    }
+
+    .flyer__wa {
+      display: inline-block;
+      margin-top: 2mm;
+      background: var(--whatsapp);
+      color: white;
+      font-weight: 700;
+      font-size: 9.5pt;
+      padding: 2mm 4mm;
+      border-radius: 999px;
+    }
+
+    .screen-hint {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      z-index: 100;
+    }
+
+    @media print {
+      html, body { background: white; }
+      .screen-hint { display: none !important; }
+    }
+
+    @media screen {
+      body {
+        margin: 16px auto;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+      }
+    }
+  </style>
+</head>
+<body>
+  <p class="screen-hint">Для печати: Cmd+P (Mac) или Ctrl+P → формат A4, поля «нет»</p>
+
+  <article class="flyer">
+    <header class="flyer__hero">
+      <div class="flyer__hero-content">
+        <span class="flyer__tag">Гостевой дом · 2026</span>
+        <h1 class="flyer__title">Отдых у моря<br>в Кабардинке</h1>
+        <p class="flyer__subtitle">8 номеров · 15 минут пешком до пляжа</p>
+      </div>
+    </header>
+
+    <div class="flyer__body">
+      <section class="flyer__benefits">
+        <h2>Почему к нам?</h2>
+        <ul class="benefit-list">
+          <li>
+            <span class="icon">🏠</span>
+            <div>
+              <strong>Новый гостевой дом</strong>
+              Современные номера с кондиционером, ТВ и отдельной ванной
+            </div>
+          </li>
+          <li>
+            <span class="icon">👨‍👩‍👧‍👦</span>
+            <div>
+              <strong>Для семьи и компании</strong>
+              Двухместные и просторные номера до 4 гостей
+            </div>
+          </li>
+          <li>
+            <span class="icon">🏊</span>
+            <div>
+              <strong>Бассейн на территории</strong>
+              Кухня, прачечная и настольный теннис для гостей
+            </div>
+          </li>
+          <li>
+            <span class="icon">✈️</span>
+            <div>
+              <strong>Удобно добраться</strong>
+              Бесплатная встреча в аэропорту Геленджика
+            </div>
+          </li>
+        </ul>
+        <p class="flyer__cta-text">
+          <strong>Сканируйте QR-код</strong> — посмотрите фото всех номеров,
+          цены и забронируйте место через WhatsApp за пару минут.
+        </p>
+      </section>
+
+      <aside class="flyer__qr-block">
+        <h2>Смотрите номера<br>и бронируйте</h2>
+        <p>Наведите камеру телефона на код</p>
+        <img
+          class="flyer__qr"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=8&data=https%3A%2F%2Ftsepilovegor-ux.github.io%2Fkabardinka-rooms"
+          width="400"
+          height="400"
+          alt="QR-код сайта">
+        <p class="flyer__url">tsepilovegor-ux.github.io/kabardinka-rooms</p>
+      </aside>
+    </div>
+
+    <footer class="flyer__footer">
+      <div class="flyer__address">
+        <strong>Как нас найти</strong>
+        Геленджик, село Кабардинка<br>
+        Восточный переулок, д. 6а
+      </div>
+      <div class="flyer__phones">
+        <strong>Бронирование</strong>
+        8 (904) 803-36-00 — Людмила<br>
+        8 (912) 800-33-50 — Юрий<br>
+        <span class="flyer__wa">WhatsApp</span>
+      </div>
+    </footer>
+  </article>
+</body>
+</html>
