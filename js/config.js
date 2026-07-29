@@ -162,9 +162,18 @@ const SITE_CONFIG = {
     {
       id: 5,
       name: "Номер 5",
-      description: "Описание добавите позже.",
-      capacity: "2 гостя",
-      image: "images/rooms/room-5.jpg",
+      description:
+        "Просторный номер для семьи до 4 человек с собственным балконом. В одной комнате — двуспальная кровать с мягким изголовьем, шкаф, ТВ и кондиционер. Во второй — две односпальные кровати, кресло и стильный шкаф. Балкон с креслом и видом на зелёные холмы. Современная ванная с душем и мраморной плиткой.",
+      capacity: "до 4 гостей",
+      image: "images/rooms/room-5/01.jpg",
+      images: [
+        "images/rooms/room-5/01.jpg",
+        "images/rooms/room-5/02.jpg",
+        "images/rooms/room-5/03.jpg",
+        "images/rooms/room-5/04.jpg",
+        "images/rooms/room-5/05.jpg",
+        "images/rooms/room-5/06.jpg",
+      ],
     },
     {
       id: 6,
