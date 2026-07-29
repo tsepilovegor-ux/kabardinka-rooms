@@ -2,17 +2,18 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Флаер — Кабардинка · у моря</title>
   <style>
     :root {
       --sea-deep: #0a3d62;
       --sea-mid: #1e6f9f;
       --sea-light: #48cae4;
-      --sand: #f4e4bc;
       --sand-light: #faf6ee;
       --white: #ffffff;
       --text: #1a2a3a;
       --whatsapp: #25d366;
+      --flyer-cover: url("images/flyer-hero.jpg");
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,59 +23,69 @@
       margin: 0;
     }
 
-    html, body {
-      width: 210mm;
-      height: 297mm;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      color: var(--text);
-      background: #ddd;
+    html {
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
 
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background: #c8d6e0;
+    }
+
+    .screen-hint {
+      max-width: 210mm;
+      margin: 12px auto 0;
+      padding: 10px 14px;
+      background: #1a2a3a;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: center;
+    }
+
     .flyer {
       width: 210mm;
-      height: 297mm;
+      min-height: 297mm;
+      margin: 12px auto 24px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       background: var(--sand-light);
-      position: relative;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22);
     }
 
     .flyer__hero {
       position: relative;
-      height: 88mm;
+      height: 92mm;
       overflow: hidden;
       background: var(--sea-deep);
     }
 
-    .flyer__hero-img {
+    .flyer__hero::before {
+      content: "";
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 35%;
-      filter: saturate(1.45) contrast(1.15) brightness(1.08);
+      background: var(--flyer-cover) center 38% / cover no-repeat;
+      filter: saturate(1.35) contrast(1.12) brightness(1.06);
     }
 
     .flyer__hero::after {
       content: "";
       position: absolute;
       inset: 0;
-      z-index: 1;
       background: linear-gradient(
         180deg,
-        rgba(10, 61, 98, 0.18) 0%,
-        rgba(10, 61, 98, 0.52) 55%,
-        rgba(10, 61, 98, 0.78) 100%
+        rgba(10, 61, 98, 0.08) 0%,
+        rgba(10, 61, 98, 0.38) 50%,
+        rgba(10, 61, 98, 0.72) 100%
       );
     }
 
     .flyer__hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 1;
       height: 100%;
       padding: 10mm 12mm 8mm;
       display: flex;
@@ -90,8 +101,8 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       border-radius: 999px;
       padding: 1.5mm 4mm;
       margin-bottom: 3mm;
@@ -103,15 +114,14 @@
       line-height: 1.08;
       letter-spacing: -0.02em;
       max-width: 140mm;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
     }
 
     .flyer__subtitle {
       margin-top: 2mm;
       font-size: 13pt;
       font-weight: 500;
-      opacity: 0.95;
-      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
     }
 
     .flyer__body {
@@ -120,6 +130,7 @@
       display: grid;
       grid-template-columns: 1fr 76mm;
       gap: 8mm;
+      align-items: start;
     }
 
     .flyer__benefits h2 {
@@ -263,38 +274,24 @@
       border-radius: 999px;
     }
 
-    .screen-hint {
-      position: fixed;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #333;
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 14px;
-      z-index: 100;
-    }
-
     @media print {
-      html, body { background: white; }
-      .screen-hint { display: none !important; }
-    }
-
-    @media screen {
-      body {
-        margin: 16px auto;
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+      body { background: white; }
+      .screen-hint { display: none; }
+      .flyer {
+        margin: 0;
+        box-shadow: none;
+        width: 210mm;
+        height: 297mm;
+        min-height: 297mm;
       }
     }
   </style>
 </head>
 <body>
-  <p class="screen-hint">Для печати: Cmd+P (Mac) или Ctrl+P → формат A4, поля «нет»</p>
+  <p class="screen-hint">Печать: Cmd+P / Ctrl+P → A4, книжная, поля «нет», включить «Фоновая графика»</p>
 
   <article class="flyer">
     <header class="flyer__hero">
-      <img class="flyer__hero-img" src="images/hero/05.jpg?v=3" width="1600" height="900" alt="">
       <div class="flyer__hero-content">
         <span class="flyer__tag">Гостевой дом · 2026</span>
         <h1 class="flyer__title">Отдых у моря<br>в Кабардинке</h1>
@@ -336,8 +333,8 @@
           </li>
         </ul>
         <p class="flyer__cta-text">
-          <strong>Сканируйте QR-код</strong> — посмотрите фото всех номеров,
-          цены и забронируйте место через WhatsApp за пару минут.
+          <strong>Сканируйте QR-код</strong> — посмотрите фото всех номеров
+          и забронируйте место через WhatsApp за пару минут.
         </p>
       </section>
 
