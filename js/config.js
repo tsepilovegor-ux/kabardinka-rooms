@@ -193,9 +193,17 @@ const SITE_CONFIG = {
     {
       id: 7,
       name: "Номер 7",
-      description: "Описание добавите позже.",
+      description:
+        "Уютный мансардный номер со светлой деревянной отделкой и скошенным потолком. Две раздельные кровати, ТВ, рабочий стол с креслом под мансардным окном. Современная ванная с мраморной плиткой, душем и раковиной на чёрной столешнице.",
       capacity: "2 гостя",
-      image: "images/rooms/room-7.jpg",
+      image: "images/rooms/room-7/01.jpg",
+      images: [
+        "images/rooms/room-7/01.jpg",
+        "images/rooms/room-7/02.jpg",
+        "images/rooms/room-7/03.jpg",
+        "images/rooms/room-7/04.jpg",
+        "images/rooms/room-7/05.jpg",
+      ],
     },
     {
       id: 8,
