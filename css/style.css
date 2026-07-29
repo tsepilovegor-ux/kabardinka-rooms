@@ -646,6 +646,32 @@ body.lightbox-open {
   margin-bottom: 1rem;
 }
 
+.room-card__booking {
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(10, 61, 98, 0.1);
+}
+
+.room-card__booking-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sea-deep);
+  margin-bottom: 0.45rem;
+}
+
+.room-card__phone {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--sea-mid);
+  text-decoration: none;
+  line-height: 1.55;
+}
+
+.room-card__phone:hover {
+  color: var(--sea-deep);
+  text-decoration: underline;
+}
+
 /* ===== Location ===== */
 .location-grid {
   display: grid;
