@@ -52,7 +52,6 @@ const SITE_CONFIG = {
       {
         name: "Терраса и отдых",
         icon: "☀️",
-        image: "images/about/terrace.jpg",
         description: "Навес с настольным теннисом, шезлонги у бассейна и места для отдыха на свежем воздухе.",
       },
       {
