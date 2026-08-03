@@ -281,6 +281,7 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  touch-action: pan-y;
 }
 
 .shared-carousel__track {
@@ -415,6 +416,9 @@ a { color: inherit; text-decoration: none; }
   aspect-ratio: 4 / 3;
   background: linear-gradient(135deg, var(--sea-mid), var(--sea-light));
   overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .room-card__image img {
@@ -531,6 +535,9 @@ body.lightbox-open {
   max-width: min(960px, 96vw);
   max-height: 90vh;
   text-align: center;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .lightbox__img {

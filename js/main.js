@@ -121,6 +121,62 @@ function renderRooms() {
   initRoomGalleries();
 }
 
+function bindSwipe(el, { onSwipeLeft, onSwipeRight, onTap } = {}) {
+  if (!el) return;
+
+  let startX = 0;
+  let startY = 0;
+  let tracking = false;
+  let swiped = false;
+  const threshold = 40;
+
+  el.addEventListener(
+    "touchstart",
+    (e) => {
+      if (e.touches.length !== 1) return;
+      tracking = true;
+      swiped = false;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    },
+    { passive: true }
+  );
+
+  el.addEventListener(
+    "touchend",
+    (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const touch = e.changedTouches[0];
+      const dx = touch.clientX - startX;
+      const dy = touch.clientY - startY;
+
+      if (Math.abs(dx) > threshold && Math.abs(dx) > Math.abs(dy) * 1.2) {
+        swiped = true;
+        if (dx < 0) onSwipeLeft?.();
+        else onSwipeRight?.();
+        return;
+      }
+
+      if (Math.abs(dx) < 12 && Math.abs(dy) < 12) {
+        onTap?.(e);
+      }
+    },
+    { passive: true }
+  );
+
+  el.addEventListener(
+    "click",
+    (e) => {
+      if (!swiped) return;
+      e.preventDefault();
+      e.stopPropagation();
+      swiped = false;
+    },
+    true
+  );
+}
+
 function initRoomGalleries() {
   document.querySelectorAll(".room-card__gallery").forEach((gallery) => {
     const main = gallery.querySelector(".room-card__main");
@@ -140,10 +196,10 @@ function initRoomGalleries() {
     function setPhoto(index) {
       const images = getImages();
       if (!images.length) return;
-      currentIndex = index;
-      main.src = images[index];
-      thumbs.forEach((t, i) => t.classList.toggle("active", i === index));
-      if (counter) counter.textContent = `${index + 1} / ${images.length}`;
+      currentIndex = ((index % images.length) + images.length) % images.length;
+      main.src = images[currentIndex];
+      thumbs.forEach((t, i) => t.classList.toggle("active", i === currentIndex));
+      if (counter) counter.textContent = `${currentIndex + 1} / ${images.length}`;
     }
 
     function openZoom() {
@@ -162,7 +218,15 @@ function initRoomGalleries() {
       openZoom();
     });
 
-    main.addEventListener("click", openZoom);
+    bindSwipe(imageWrap, {
+      onSwipeLeft: () => {
+        if (getImages().length > 1) setPhoto(currentIndex + 1);
+      },
+      onSwipeRight: () => {
+        if (getImages().length > 1) setPhoto(currentIndex - 1);
+      },
+      onTap: openZoom,
+    });
   });
 }
 
@@ -256,6 +320,18 @@ function initSharedCarousel() {
     });
   });
 
+  const viewport = track.closest(".shared-carousel__viewport") || track.parentElement;
+  bindSwipe(viewport, {
+    onSwipeLeft: () => {
+      goTo(current + 1);
+      startAutoplay();
+    },
+    onSwipeRight: () => {
+      goTo(current - 1);
+      startAutoplay();
+    },
+  });
+
   startAutoplay();
 }
 
@@ -336,6 +412,11 @@ function initLightbox() {
 
   lb.addEventListener("click", (e) => {
     if (e.target === lb) closeLightbox();
+  });
+
+  bindSwipe(lb.querySelector(".lightbox__content") || lb, {
+    onSwipeLeft: () => shiftLightbox(1),
+    onSwipeRight: () => shiftLightbox(-1),
   });
 
   document.addEventListener("keydown", (e) => {
