@@ -13,7 +13,7 @@ const SITE_CONFIG = {
   ],
 
   // URL сайта после публикации (нужен для QR-кода)
-  siteUrl: "https://tsepilovegor-ux.github.io/kabardinka-rooms",
+  siteUrl: "https://домкабардинка.рф",
 
   // Фото на главном экране (меняются автоматически)
   heroSlideInterval: 5000,
