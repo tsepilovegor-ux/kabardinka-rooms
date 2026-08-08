@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://домкабардинка.рф/sitemap.xml
+Sitemap: https://xn--80aaacnd2alfnre5a.xn--p1ai/sitemap.xml
